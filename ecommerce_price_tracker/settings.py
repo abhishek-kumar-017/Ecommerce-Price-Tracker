@@ -120,6 +120,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INSTALLED_APPS = [
-    'rest_framework',  # if using DRF for APIs
-    'tracker',  # add your app here
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # Your apps
+    'tracker',
+    'rest_framework',
 ]

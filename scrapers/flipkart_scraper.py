@@ -10,7 +10,7 @@ class FlipkartScraper(BaseScraper):
     def scrape(self, keyword):
         headers = {"User-Agent": "Mozilla/5.0"}
         for page in range(1, 3):
-            url = f"https://www.flipkart.com/search?q={keyword}&page={page}"
+            url = f"https://www.amazon.com/search?q={keyword}&page={page}"
             response = requests.get(url, headers=headers)
             soup = BeautifulSoup(response.text, "html.parser")
 

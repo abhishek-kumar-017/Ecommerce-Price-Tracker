@@ -1,6 +1,6 @@
 # scrapers/factory.py
-from scrappers.flipkart_scrapper import FlipkartScraper
-from scrappers.amazon_scrapper import AmazonScraper
+from scrapers.flipkart_scraper import FlipkartScraper
+from scrapers.amazon_scraper import AmazonScraper
 
 
 class ScraperFactory:

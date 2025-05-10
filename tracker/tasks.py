@@ -1,6 +1,6 @@
 # tasks.py
 from celery import shared_task
-from scrappers.factory import ScraperFactory
+from scrapers.factory import ScraperFactory
 
 
 @shared_task
