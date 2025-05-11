@@ -24,7 +24,12 @@ class AmazonScraper:
 
         for page in range(1, 3):
             url = f"https://www.amazon.in/s?k={self.keyword}&page={page}"
-            self.driver.get(url)
+            try:
+                self.driver.get(url)
+            except Exception as e:
+                print(f"Failed to load page: {e}")
+                self.driver.quit()
+                return []
 
             try:
                 time.sleep(3)
