@@ -1,21 +1,22 @@
-from rest_framework import generics, filters
+from rest_framework import generics
 from .models import Product, PriceHistory
 from .serializers import ProductSerializer, PriceHistorySerializer
 
 
-# List & Search products
 class ProductListView(generics.ListAPIView):
-    queryset = Product.objects.all().order_by('-last_updated')
+    # queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'seller__name']
+
+    def get_queryset(self):
+        return Product.objects.all()
+        # keyword = self.request.query_params.get('search')
+        # if keyword:
+        #     return self.queryset.filter(title__icontains=keyword)
+        # return self.queryset
 
 
-# Get price history for a specific product
 class ProductPriceHistoryView(generics.ListAPIView):
     serializer_class = PriceHistorySerializer
 
     def get_queryset(self):
-        product_id = self.kwargs['pk']
-        return PriceHistory.objects.filter(
-            product_id=product_id).order_by('-checked_at')
+        return PriceHistory.objects.filter(product_id=self.kwargs['pk'])
