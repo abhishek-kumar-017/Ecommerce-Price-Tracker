@@ -4,19 +4,20 @@ from .serializers import ProductSerializer, PriceHistorySerializer
 
 
 class ProductListView(generics.ListAPIView):
-    # queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        return Product.objects.all()
-        # keyword = self.request.query_params.get('search')
-        # if keyword:
-        #     return self.queryset.filter(title__icontains=keyword)
-        # return self.queryset
+        queryset = Product.objects.all()
+        if 'search' in self.request.query_params:
+            keyword = self.request.query_params.get('search')
+            if keyword:
+                return queryset.filter(title__icontains=keyword)
+        return queryset
 
 
 class ProductPriceHistoryView(generics.ListAPIView):
     serializer_class = PriceHistorySerializer
 
     def get_queryset(self):
-        return PriceHistory.objects.filter(product_id=self.kwargs['pk'])
+        queryset = PriceHistory.objects.all()
+        return queryset.filter(product_id=self.kwargs['pk'])

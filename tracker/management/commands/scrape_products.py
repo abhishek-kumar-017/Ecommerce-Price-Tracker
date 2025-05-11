@@ -19,15 +19,35 @@ class Command(BaseCommand):
 
         data = scraper.scrape()
         for item in data:
-            product, created = Product.objects.get_or_create(
-                title=item['title'],
-                defaults={
-                    'price': item['price'],
-                    'rating': item.get('rating'),
-                    'reviews': item.get('reviews'),
-                    'seller': item.get('seller'),
-                    'source': options['site'],
-                })
-            print(f"Fetched {len(product)} products from {options['site']}")
+            try:
+                product = Product.objects.get(title=item['title'])
 
-            PriceHistory.objects.create(product=product, price=item['price'])
+                if product.price != item['price']:
+
+                    # Update product price
+                    product.price = item['price']
+                    product.rating = item.get('rating')
+                    product.reviews = item.get('reviews')
+                    product.seller = item.get('seller')
+                    product.source = options['site']
+                    product.save()
+
+                    # Save price history
+                    PriceHistory.objects.create(product=product,
+                                                price=item['price'])
+
+            except Product.DoesNotExist:
+                # Create new product if it doesn't exist
+                product = Product.objects.create(
+                    title=item['title'],
+                    price=item['price'],
+                    rating=item.get('rating'),
+                    reviews=item.get('reviews'),
+                    seller=item.get('seller'),
+                    source=options['site'],
+                )
+                print(f"New product added: {product.title}")
+
+                # Save initial price history
+                PriceHistory.objects.create(product=product,
+                                            price=item['price'])

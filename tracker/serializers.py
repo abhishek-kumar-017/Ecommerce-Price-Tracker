@@ -11,6 +11,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class PriceHistorySerializer(serializers.ModelSerializer):
 
+    product_name = serializers.SerializerMethodField()
+
     class Meta:
         model = PriceHistory
-        fields = '__all__'
+        fields = ['product_name', 'price', 'checked_at']
+
+    def get_product_name(self, obj):
+        # Return the product's title associated with this price history entry
+        return obj.product.title

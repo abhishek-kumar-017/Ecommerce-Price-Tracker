@@ -5,7 +5,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.FloatField(null=True, blank=True)
-    reviews = models.IntegerField(default=0)
+    reviews = models.IntegerField(default=0, null=True, blank=True)
     seller = models.CharField(max_length=255)
     source = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
