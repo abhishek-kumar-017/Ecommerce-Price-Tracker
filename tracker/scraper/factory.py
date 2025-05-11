@@ -5,10 +5,10 @@ from .flipkart_scraper import FlipkartScraper
 class ScraperFactory:
 
     @staticmethod
-    def get_scraper(site, keyword):
+    def get_scraper(site, keyword, pages):
         if site == 'amazon':
-            return AmazonScraper(keyword)
+            return AmazonScraper(keyword, pages)
         elif site == 'flipkart':
-            return FlipkartScraper(keyword)
+            return FlipkartScraper(keyword, pages)
         else:
             raise ValueError("Unsupported site")

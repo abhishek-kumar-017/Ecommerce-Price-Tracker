@@ -9,9 +9,11 @@
             "args": [
                 "scrape_products",
                 "--site",
-                "flipkart",
+                "amazon",
                 "--keyword",
-                "laptop"
+                "watch",
+                "--pages",
+                "3"
             ],
             "django": true
         }

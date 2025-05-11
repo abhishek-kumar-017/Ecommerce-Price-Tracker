@@ -8,8 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class AmazonScraper:
 
-    def __init__(self, keyword):
+    def __init__(self, keyword, pages):
         self.keyword = keyword
+        self.pages = pages
         options = Options()
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
@@ -22,7 +23,7 @@ class AmazonScraper:
     def scrape(self):
         products = []
 
-        for page in range(1, 3):
+        for page in range(1, self.pages):
             url = f"https://www.amazon.in/s?k={self.keyword}&page={page}"
             try:
                 self.driver.get(url)

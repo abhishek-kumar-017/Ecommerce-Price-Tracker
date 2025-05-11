@@ -93,12 +93,12 @@ python manage.py migrate
 
 To scrape products (e.g., smartphones from Flipkart):
 ```bash
-python manage.py scrape_products --site flipkart --keyword smartphones
+python manage.py scrape_products --site flipkart --keyword smartphones --pages 3
 ```
 
 Amazon example:
 ```bash
-python manage.py scrape_products --site amazon --keyword laptops
+python manage.py scrape_products --site amazon --keyword laptops --pages 3
 ```
 
 ### 🔌 API Endpoints (via Django REST Framework)

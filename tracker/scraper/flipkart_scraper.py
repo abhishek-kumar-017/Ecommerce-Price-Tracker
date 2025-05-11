@@ -6,10 +6,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
+# NOT WORKING
 class FlipkartScraper:
 
-    def __init__(self, keyword):
+    def __init__(self, keyword, pages):
         self.keyword = keyword
+        self.pages = pages
         options = Options()
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
@@ -22,7 +24,8 @@ class FlipkartScraper:
     def scrape(self):
         products = []
 
-        for page in range(1, 3):  # You can scrape more pages if needed
+        for page in range(1,
+                          self.pages):  # You can scrape more pages if needed
             url = f"https://www.flipkart.com/search?q={self.keyword}&page={page}"
             self.driver.get(url)
 
